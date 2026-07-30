@@ -1,7 +1,11 @@
-import React from 'react'
+
+import Banner from '@/components/shared/banner'
+
 
 export default function page() {
   return (
-    <div>public home page</div>
+    <div className='max-w-7xl mx-auto'>
+      <Banner/>
+    </div>
   )
 }

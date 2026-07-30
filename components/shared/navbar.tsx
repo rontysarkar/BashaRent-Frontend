@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Menu, X, LayoutGrid, LogOut, Settings, User } from "lucide-react"
+import { Menu,  LogOut, Settings, User, HomeIcon } from "lucide-react"
 
 import {
   NavigationMenu,
@@ -31,12 +31,12 @@ import { Button } from "@/components/ui/button"
 import { UserDataResponse } from "@/types/user.types"
 import { logoutAction } from "@/actions/auth/logout.actioin"
 
-const navLinks = [
-  { title: "Home", href: "/" },
-  { title: "Products", href: "/products" },
-  { title: "About", href: "/about" },
-  { title: "Contact", href: "/contact" },
-]
+// const navLinks = [
+//   { title: "Home", href: "/" },
+//   { title: "Products", href: "/products" },
+//   { title: "About", href: "/about" },
+//   { title: "Contact", href: "/contact" },
+// ]
 
 export function Navbar({ user }: { user: UserDataResponse }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -51,15 +51,15 @@ export function Navbar({ user }: { user: UserDataResponse }) {
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:gap-4">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2 text-lg font-bold tracking-tight"
+          className="flex shrink-0 gap-1 justify-center  items-center text-lg font-bold tracking-tight"
         >
-          <LayoutGrid className="size-5 text-primary" aria-hidden="true" />
-          <span className="hidden sm:inline">Acme</span>
+          <HomeIcon color="green" className="size-5 text-primary " aria-hidden="true" />
+          <span className="hidden sm:inline font-bold text-xl">Rent<span className="text-green-700">Nest</span></span>
         </Link>
 
         <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList className="flex gap-1">
-            {navLinks.map((link) => (
+            {/* {navLinks.map((link) => (
               <NavigationMenuItem key={link.href}>
                 <NavigationMenuLink
                   render={<Link href={link.href} />}
@@ -68,7 +68,7 @@ export function Navbar({ user }: { user: UserDataResponse }) {
                   {link.title}
                 </NavigationMenuLink>
               </NavigationMenuItem>
-            ))}
+            ))} */}
           </NavigationMenuList>
         </NavigationMenu>
 
@@ -85,7 +85,7 @@ export function Navbar({ user }: { user: UserDataResponse }) {
               <SheetHeader className="border-b px-6 py-4">
                 <SheetTitle>Menu</SheetTitle>
               </SheetHeader>
-              <nav className="flex flex-col">
+              {/* <nav className="flex flex-col">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
@@ -96,7 +96,7 @@ export function Navbar({ user }: { user: UserDataResponse }) {
                     {link.title}
                   </Link>
                 ))}
-              </nav>
+              </nav> */}
             </SheetContent>
           </Sheet>
         </div>

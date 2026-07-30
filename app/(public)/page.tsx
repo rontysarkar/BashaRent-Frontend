@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div>sign up</div>
+    <div>public home page</div>
   )
 }

@@ -1,41 +1,76 @@
 "use client"
-
-import { useState, useTransition } from "react"
-import { Eye, EyeOff, Lock, Mail, Phone } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import React, { useState, useTransition } from "react"
+import { Button } from "../ui/button"
 import { useForm } from "react-hook-form"
-import { loginInputType, loginSchema } from "@/validations/auth.validation"
+import {
+  registerInputType,
+  registerSchema,
+} from "@/validations/auth.validation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { loginAction } from "@/actions/auth/login.action"
+import { Eye, EyeOff, Lock, Mail, User, UserCheck } from "lucide-react"
+import { Input } from "../ui/input"
+import { registerAction } from "@/actions/auth/register.action"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 
-export function LoginForm() {
+export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, startTransition] = useTransition()
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<loginInputType>({ resolver: zodResolver(loginSchema) })
+  } = useForm<registerInputType>({ resolver: zodResolver(registerSchema) })
 
-  const onSubmit = (data: loginInputType) => {
-    startTransition( async() => {
-      const res = await loginAction(data)
+  const onSubmit = (data: registerInputType) => {
+    startTransition(async () => {
+      const res = await registerAction(data)
 
       if (!res.success) {
         setError("password", {
-          message: res?.message,
+          message: res.message,
         })
+      }else{
+        toast.success("Account created successfully! Please login.");
+        router.push('/login')
       }
-      return;
+
+      return
     })
   }
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <div className="space-y-2">
+        <label
+          htmlFor="name"
+          className="flex items-center gap-2 text-sm font-semibold text-slate-700"
+        >
+          <User size={16} className="text-blue-600" />
+          Full Name
+        </label>
+
+        <div className="relative">
+          <Input
+            id="name"
+            type="text"
+            placeholder="Full Name"
+            {...register("name")}
+            className={`rounded-lg border-slate-200 transition-all placeholder:text-slate-400 focus:border-transparent focus:ring-2 focus:ring-blue-500 ${
+              errors.name ? "border-red-500 focus:ring-red-500" : ""
+            }`}
+          />
+        </div>
+
+        {errors.name && (
+          <p className="text-xs font-medium text-red-500">
+            {errors.name.message}
+          </p>
+        )}
+      </div>
       <div className="space-y-2">
         <label
           htmlFor="email"
@@ -60,6 +95,35 @@ export function LoginForm() {
         {errors.email && (
           <p className="text-xs font-medium text-red-500">
             {errors.email.message}
+          </p>
+        )}
+      </div>
+      <div className="space-y-2">
+        <label
+          htmlFor="role"
+          className="flex items-center gap-2 text-sm font-semibold text-slate-700"
+        >
+          <UserCheck size={16} className="text-blue-600" />
+          Role
+        </label>
+
+        <div className="relative">
+          <select
+            id="role"
+            defaultValue={"TENANT"}
+            {...register("role")}
+            className={`w-full rounded-lg border border-slate-200 p-1 px-2 transition-all placeholder:text-slate-400 focus:border-transparent focus:ring-2 focus:ring-blue-500 ${
+              errors.role ? "border-red-500 focus:ring-red-500" : ""
+            }`}
+          >
+            <option value="TENANT">Tenant</option>
+            <option value="LANDLORD">Landlord</option>
+          </select>
+        </div>
+
+        {errors.role && (
+          <p className="text-xs font-medium text-red-500">
+            {errors.role.message}
           </p>
         )}
       </div>
@@ -109,10 +173,10 @@ export function LoginForm() {
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
             <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-r-transparent" />
-            Logging in...
+            Creating...
           </span>
         ) : (
-          "Login"
+          "Sign up"
         )}
       </Button>
     </form>

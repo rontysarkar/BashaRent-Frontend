@@ -1,17 +1,20 @@
 "use server"
 
+export const getProperties = async () => {
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/properties`, {
+    cache: "force-cache",
+    next: {
+      revalidate: 60 * 60 * 24,
+      tags: ["properties"],
+    },
+  })
 
-export const getProperties = async () =>{
+  const result = await res.json()
+  return result
+}
 
-
-    const res = await fetch(`${process.env.BACKEND_API_URL}/api/properties`,{
-        cache:'force-cache',
-        next:{
-            revalidate:60*60*24,
-            tags:["properties"]
-        }
-    })
-
-    const result = await res.json();
-    return result;
+export const getPropertyDetails = async (id: string) => {
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/properties/${id}`)
+  const result = await res.json()
+  return result
 }

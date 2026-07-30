@@ -25,9 +25,9 @@ export default function PropertyCard({
       <div className="group flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs transition-all duration-300 hover:shadow-md">
         <div>
           <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
-            {property.image && !imgError ? (
+            {property.photo && !imgError ? (
               <Image
-                src={property.image}
+                src={property.photo}
                 alt={property.title || "Property Image"}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"

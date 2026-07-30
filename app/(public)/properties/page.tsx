@@ -1,7 +1,6 @@
 import PropertyCard from "@/components/shared/property-card"
 import { getProperties } from "@/services/propertiy.service"
 import { IPropertyResponse } from "@/types/property.types"
-import React from "react"
 
 export default async function page() {
   const properties = await getProperties()
@@ -19,7 +18,7 @@ export default async function page() {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {properties?.data.slice(0, 8).map((property: IPropertyResponse) => (
+          {properties?.data.slice(0, 20).map((property: IPropertyResponse) => (
             <PropertyCard key={property.id} property={property} />
           ))}
         </div>

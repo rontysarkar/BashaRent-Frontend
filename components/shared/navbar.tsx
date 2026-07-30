@@ -53,8 +53,8 @@ export function Navbar({ user }: { user: UserDataResponse }) {
           href="/"
           className="flex shrink-0 gap-1 justify-center  items-center text-lg font-bold tracking-tight"
         >
-          <HomeIcon color="green" className="size-5 text-primary " aria-hidden="true" />
-          <span className="hidden sm:inline font-bold text-xl">Rent<span className="text-green-700">Nest</span></span>
+          <HomeIcon color="green" className="size-6 text-primary " aria-hidden="true" />
+          <span className="hidden sm:inline font-bold text-2xl">Rent<span className="text-green-700">Nest</span></span>
         </Link>
 
         <NavigationMenu className="hidden lg:flex">
@@ -159,7 +159,7 @@ export function Navbar({ user }: { user: UserDataResponse }) {
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <Link href={"/login"}>Login</Link>
+          <Link className="font-bold" href={"/login"}>Login</Link>
         )}
       </div>
     </header>

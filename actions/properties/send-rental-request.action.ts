@@ -10,5 +10,18 @@ export const sendRentalRequestAction =async(propertyId:string)=>{
     if(!accessToken){
         redirect('/login')
     }
-    console.log(accessToken)
+    const payload = {propertyId};
+    
+    const res = await fetch(`${process.env.BACKEND_API_URL}/api/rentals/`,{
+        method:"POST",
+        headers:{
+            Cookie:`accessToken=${accessToken}`,
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(payload)
+        
+    })
+
+    const result = await res.json();
+    return result
 }

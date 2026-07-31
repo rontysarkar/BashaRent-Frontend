@@ -14,12 +14,13 @@ import {
 import PropertyDetailsImageBox from "./property-details-image-box"
 import { PropertyDetailsResponse } from "@/types/property.types"
 import PropertyDetailsButton from "./property-details-button"
+import { getPropertyStatus } from "@/services/propertiy.service"
 
 interface PropertyDetailsProps {
   property: PropertyDetailsResponse
 }
 
-export default function PropertyDetails({ property }: PropertyDetailsProps) {
+export default async function PropertyDetails({ property }: PropertyDetailsProps) {
   const amenityList = property.amenities
     ? property.amenities
         .split(",")
@@ -35,6 +36,8 @@ export default function PropertyDetails({ property }: PropertyDetailsProps) {
       day: "numeric",
     }
   )
+
+  
 
   return (
     <div className="bg-slate-50/50 py-8 text-slate-800">

@@ -30,6 +30,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { UserDataResponse } from "@/types/user.types"
 import { logoutAction } from "@/actions/auth/logout.actioin"
+import { useAuth } from "@/context/auth-context"
+
 
 // const navLinks = [
 //   { title: "Home", href: "/" },
@@ -40,11 +42,18 @@ import { logoutAction } from "@/actions/auth/logout.actioin"
 
 export function Navbar({ user }: { user: UserDataResponse }) {
   const [isOpen, setIsOpen] = useState(false)
-  const handleAction = (action: string) => {
+  const {setUser} = useAuth();
+  const handleAction = async (action: string) => {
     if (action === "logout") {
-      logoutAction()
+      const result = await logoutAction()
+      if(result.success){
+        setUser(null)
+      }
     }
   }
+
+
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

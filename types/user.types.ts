@@ -1,9 +1,11 @@
 // Enums for strongly-typed roles and statuses
 
-import { UserRole, UserStatus } from "./common.types";
+export type UserRole = "TENANT" | "LANDLORD" | "ADMIN"
+
+export type UserStatus = 'ACTIVE' | "BANNED"
 
 
-export interface UserData {
+export interface IUserData {
   id: string;
   name: string;
   email: string;
@@ -23,4 +25,4 @@ export interface ApiResponse<T> {
 }
 
 // Specific type alias for this user endpoint response
-export type UserDataResponse = ApiResponse<UserData>;
+export type UserDataResponse = ApiResponse<IUserData>;

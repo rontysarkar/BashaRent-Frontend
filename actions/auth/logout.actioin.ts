@@ -8,5 +8,8 @@ export const logoutAction = async () => {
   cookieStore.delete("accessToken")
   cookieStore.delete("refreshToken")
 
-  redirect("/login")
+  return {
+    success: true,
+    message: "Logout Successfully",
+  }
 }

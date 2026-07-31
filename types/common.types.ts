@@ -1,10 +1,11 @@
-export enum UserRole {
-  ADMIN = "ADMIN",
-  LANDLORD = "LANDLORD",
-  TENANT = "TENANT"
+import { LucideIcon } from "lucide-react"
+
+
+
+export type MenuItems = {
+  title: string
+  url: string
+  icon: LucideIcon
 }
 
-export enum UserStatus {
-  ACTIVE = "ACTIVE",
-  BANNED = "BANNED"
-}
+

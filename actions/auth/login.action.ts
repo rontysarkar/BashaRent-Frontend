@@ -1,8 +1,8 @@
 "use server"
 
+import { getMe } from "@/services/auth.service"
 import { loginInputType } from "@/validations/auth.validation"
 import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
 
 export const loginAction = async (data: loginInputType) => {
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/login`, {
@@ -27,7 +27,8 @@ export const loginAction = async (data: loginInputType) => {
       maxAge: 60 * 60 * 24 * 30,
     })
 
-    redirect("/")
+    const userdata = await getMe();
+    return userdata;
   } else {
     return {
       success: false,

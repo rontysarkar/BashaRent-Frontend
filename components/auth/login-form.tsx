@@ -8,11 +8,15 @@ import { useForm } from "react-hook-form"
 import { loginInputType, loginSchema } from "@/validations/auth.validation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginAction } from "@/actions/auth/login.action"
-
+import { useAuth } from "@/context/auth-context"
+import { getMe } from "@/services/auth.service"
+import { useRouter } from "next/navigation"
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, startTransition] = useTransition()
+  const router = useRouter()
+  const { setUser } = useAuth()
 
   const {
     register,
@@ -22,7 +26,7 @@ export function LoginForm() {
   } = useForm<loginInputType>({ resolver: zodResolver(loginSchema) })
 
   const onSubmit = (data: loginInputType) => {
-    startTransition( async() => {
+    startTransition(async () => {
       const res = await loginAction(data)
 
       if (!res.success) {
@@ -30,7 +34,10 @@ export function LoginForm() {
           message: res?.message,
         })
       }
-      return;
+
+      setUser(res?.data)
+      router.push("/tenant-dashboard")
+      return
     })
   }
 

@@ -48,3 +48,6 @@ export interface PropertyDetailsResponse {
   category: Category
   reviews: string[]
 }
+
+
+export type PropertyStatusTypes = "PENDING" | "APPROVED" | "REJECTED" | "NONE"

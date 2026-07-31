@@ -6,7 +6,7 @@ export default function Banner() {
     <div className="w-full border-y border-slate-200 px-5 py-8 sm:px-8 sm:py-16">
       <div className="mx-auto max-w-2xl text-center">
         <h1 className="text-2xl font-bold tracking-tight text-slate-800 sm:text-3xl">
-          Find your home or rent out your place
+          Find your home or Rent out your place
         </h1>
 
         <p className="mt-2 text-sm text-slate-600 sm:text-base">

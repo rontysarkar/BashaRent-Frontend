@@ -21,7 +21,6 @@ export const sendRentalRequestAction =async(propertyId:string)=>{
         body:JSON.stringify(payload)
         
     })
-
     const result = await res.json();
     return result
 }

@@ -26,7 +26,7 @@ export const getPropertyDetails = async (id: string) => {
   return result
 }
 
-export const getPropertyStatus = async(propertyId:string)=>{
+export const getPropertyRequestStatus = async(propertyId:string)=>{
 
   const accessToken = await getAccessToken();
   if(!accessToken){

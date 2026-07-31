@@ -14,7 +14,6 @@ import {
 import PropertyDetailsImageBox from "./property-details-image-box"
 import { PropertyDetailsResponse } from "@/types/property.types"
 import PropertyDetailsButton from "./property-details-button"
-import { getPropertyStatus } from "@/services/propertiy.service"
 
 interface PropertyDetailsProps {
   property: PropertyDetailsResponse
@@ -37,7 +36,6 @@ export default async function PropertyDetails({ property }: PropertyDetailsProps
     }
   )
 
-  
 
   return (
     <div className="bg-slate-50/50 py-8 text-slate-800">
@@ -183,7 +181,7 @@ export default async function PropertyDetails({ property }: PropertyDetailsProps
                 </p>
               )}
 
-              <PropertyDetailsButton propertyId={property?.id} />
+              <PropertyDetailsButton propertyStatus={property?.status} propertyId={property?.id} />
             </div>
             {/* Additional Info */}
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">

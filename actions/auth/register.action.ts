@@ -12,7 +12,6 @@ export const registerAction = async (payload: registerInputType) => {
   })
 
   const result = await res.json()
-  console.log(result)
   return {
     success: result.success,
     message: result.message,

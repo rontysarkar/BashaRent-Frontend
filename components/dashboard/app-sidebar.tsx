@@ -3,7 +3,6 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -12,36 +11,19 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import {
-  Building2,
-  FolderKanban,
-  LayoutDashboard,
-  LogOut,
-  Users,
-} from "lucide-react"
+import { menuConfig } from "@/constant/dashboard-menu"
+import { useAuth } from "@/context/auth-context"
+import { LayoutDashboard } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-const items = [
-  {
-    title: "All Users",
-    url: "/dashboard/users",
-    icon: Users,
-  },
-  {
-    title: "All Properties",
-    url: "/dashboard/properties",
-    icon: Building2,
-  },
-  {
-    title: "All Categories",
-    url: "/dashboard/categories",
-    icon: FolderKanban,
-  },
-]
-
 export function AppSidebar() {
+  const { user } = useAuth()
+  const items = user?.role
+    ? menuConfig[user?.role as keyof typeof menuConfig]
+    : []
   const pathname = usePathname()
+
   return (
     <Sidebar className="mt-16">
       <SidebarHeader className="border-b border-slate-100 p-4">
@@ -51,7 +33,7 @@ export function AppSidebar() {
           </div>
           <div className="flex flex-col">
             <span className="text-sm font-bold text-slate-800">
-              Admin Panel
+              {user?.role} PANEL
             </span>
             <span className="text-[10px] text-slate-500">Manage System</span>
           </div>
@@ -63,19 +45,20 @@ export function AppSidebar() {
           <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => {
-                const isActive = pathname === item.url
+              {items?.map((item) => {
+                const isActive = pathname === item?.url
                 return (
-                  <SidebarMenuItem key={item.title}>
+                  <SidebarMenuItem key={item?.title}>
                     <SidebarMenuButton
                       isActive={isActive}
+                      className={isActive ? "bg-amber-500 text-white" : ""}
                       render={
                         <Link
-                          href={item.url}
-                          className="flex w-full items-center gap-3"
+                          href={item?.url}
+                          className={`flex w-full items-center`}
                         >
                           <item.icon size={18} />
-                          <span>{item.title}</span>
+                          <span>{item?.title}</span>
                         </Link>
                       }
                     />

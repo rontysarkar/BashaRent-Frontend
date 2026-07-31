@@ -9,14 +9,13 @@ import { loginInputType, loginSchema } from "@/validations/auth.validation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginAction } from "@/actions/auth/login.action"
 import { useAuth } from "@/context/auth-context"
-import { getMe } from "@/services/auth.service"
 import { useRouter } from "next/navigation"
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, startTransition] = useTransition()
   const router = useRouter()
-  const { setUser } = useAuth()
+  const { setUser,user } = useAuth()
 
   const {
     register,
@@ -34,7 +33,6 @@ export function LoginForm() {
           message: res?.message,
         })
       }
-
       setUser(res?.data)
       router.push("/tenant-dashboard")
       return

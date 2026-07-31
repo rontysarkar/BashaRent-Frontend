@@ -2,7 +2,13 @@
 
 import { getMe } from "@/services/auth.service"
 import { IUserData } from "@/types/user.types"
-import { createContext, ReactNode, useContext, useEffect, useState } from "react"
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react"
 
 type AuthContextType = {
   user: IUserData | null
@@ -19,8 +25,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const data = await getMe()
-        setUser(data)
+        const res = await getMe()
+        if (res.success) {
+          setUser(res?.data)
+        }
       } catch (error) {
         setUser(null)
       } finally {
@@ -28,12 +36,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     }
 
-    fetchUser();
+    fetchUser()
   }, [])
 
   return (
-    <AuthContext.Provider value={{user,isLoading,setUser}}>
-        {children}
+    <AuthContext.Provider value={{ user, isLoading, setUser }}>
+      {children}
     </AuthContext.Provider>
   )
 }

@@ -7,16 +7,13 @@ import {
   CheckCircle2,
   Calendar,
   User,
-  Mail,
-  PhoneCall,
   ArrowLeft,
   Share2,
   Heart,
-  Send,
-  CreditCard,
 } from "lucide-react"
 import PropertyDetailsImageBox from "./property-details-image-box"
 import { PropertyDetailsResponse } from "@/types/property.types"
+import PropertyDetailsButton from "./property-details-button"
 
 interface PropertyDetailsProps {
   property: PropertyDetailsResponse
@@ -183,23 +180,7 @@ export default function PropertyDetails({ property }: PropertyDetailsProps) {
                 </p>
               )}
 
-              <div className="mt-6 space-y-3 border-t border-slate-100 pt-4">
-                <a
-                  href={`mailto:${property.landlord?.email}`}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-600 px-4 py-3 text-xs font-semibold text-white transition hover:bg-blue-700 active:scale-98"
-                >
-                  <Send size={16} />
-                  Send Request
-                </a>
-
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 active:scale-98"
-                >
-                  <CreditCard size={18} className="text-blue-600" />
-                  Pay
-                </button>
-              </div>
+              <PropertyDetailsButton propertyId={property?.id} />
             </div>
             {/* Additional Info */}
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">

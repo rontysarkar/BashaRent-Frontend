@@ -17,11 +17,21 @@ export default async function page() {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {properties?.data.slice(0, 20).map((property: IPropertyResponse) => (
-            <PropertyCard key={property.id} property={property} />
-          ))}
-        </div>
+        {!properties.success || properties.data?.length === 0 ? (
+          <div className="flex min-h-[400px] w-full items-center justify-center text-center">
+            <h3 className="text-xl font-medium text-gray-500">
+              No Property Available
+            </h3>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {properties?.data
+              .slice(0, 20)
+              .map((property: IPropertyResponse) => (
+                <PropertyCard key={property.id} property={property} />
+              ))}
+          </div>
+        )}
       </div>
     </div>
   )

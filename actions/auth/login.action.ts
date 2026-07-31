@@ -18,13 +18,13 @@ export const loginAction = async (data: loginInputType) => {
     cookieStore.set("accessToken", result?.data?.accessToken, {
       httpOnly: true,
       sameSite: "lax",
-      maxAge: 60 * 60 * 24,
+      maxAge: 60 * 60 * 24 * 7,
     })
 
     cookieStore.set("refreshToken", result?.data.refreshToken, {
       httpOnly: true,
       sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7,
+      maxAge: 60 * 60 * 24 * 30,
     })
 
     redirect("/")

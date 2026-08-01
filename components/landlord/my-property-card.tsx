@@ -1,0 +1,122 @@
+"use client"
+
+import Image from "next/image"
+import {
+  MapPin,
+  Building2,
+  CheckCircle2,
+  ShieldCheck,
+  Trash2,
+} from "lucide-react"
+import { IPropertyResponse } from "@/types/property.types"
+import { useState } from "react"
+import { Button } from "../ui/button"
+import { PropertyDialog } from "./property-dialog"
+
+export default function MyPropertyCard({
+  property,
+}: {
+  property: IPropertyResponse
+}) {
+  const [imgError, setImgError] = useState(false)
+
+  const amenityList = property.amenities
+    ? property.amenities
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean)
+    : []
+
+  return (
+    <div className="group flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs transition-all duration-300 hover:shadow-md">
+      <div>
+        <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
+          {property.photo && !imgError ? (
+            <Image
+              src={property.photo}
+              alt={property.title || "Property Image"}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+              onError={() => setImgError(true)}
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center bg-slate-100 text-slate-400">
+              <Building2 size={36} className="stroke-[1.5]" />
+              <span className="mt-1 text-xs font-medium text-slate-400">
+                No Image Available
+              </span>
+            </div>
+          )}
+
+          <PropertyDialog mode="edit" post={property} />
+          <Button
+            variant={"ghost"}
+            className="absolute top-0 right-0 cursor-pointer rounded-r-md px-2.5 py-1 text-[11px] font-medium text-rose-700 backdrop-blur-3xl"
+          >
+            <Trash2 size={18} />
+          </Button>
+        </div>
+
+        <div className="flex justify-between px-2 pt-2">
+          {property.category?.name && (
+            <div className="rounded-md bg-amber-50 px-2 py-1 text-[10px] font-medium text-amber-700 backdrop-blur-sm">
+              {property.category.name}
+            </div>
+          )}
+          {property.status && (
+            <div className="flex items-center gap-1 rounded-md bg-green-50 px-2 py-1 text-[10px] font-semibold text-green-700 shadow-xs">
+              <ShieldCheck size={12} />
+              <span>{property.status}</span>
+            </div>
+          )}
+        </div>
+        <div className="my-1 px-3">
+          <h3 className="line-clamp-1 text-base font-semibold text-slate-800 transition hover:text-blue-600">
+            {property.title}
+          </h3>
+
+          <div className="mt-1.5 flex items-center gap-1 text-xs text-slate-500">
+            <MapPin size={14} className="shrink-0 text-blue-600" />
+            <span className="truncate">{property.location}</span>
+          </div>
+
+          <p className="mt-2.5 line-clamp-2 text-xs leading-relaxed text-slate-600">
+            {property.description}
+          </p>
+
+          {amenityList.length > 0 && (
+            <div className="mt-3.5 border-t border-slate-100 pt-3">
+              <div className="flex flex-wrap items-center gap-1.5">
+                {amenityList.slice(0, 2).map((item, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-600"
+                  >
+                    <CheckCircle2 size={11} className="text-emerald-600" />
+                    {item}
+                  </span>
+                ))}
+                {amenityList.length > 2 && (
+                  <span className="text-[11px] font-medium text-slate-400">
+                    +{amenityList.length - 2} more
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50/80 px-4 py-2.5">
+        <span className="text-xs font-medium text-slate-500">Rent:</span>
+        <div className="flex items-center gap-1">
+          <span className="text-sm font-bold text-slate-900">
+            {(property.price ?? 0).toLocaleString("en-IN")} BDT
+          </span>
+          <span className="text-[10px] font-normal text-slate-500">/mo</span>
+        </div>
+      </div>
+    </div>
+  )
+}

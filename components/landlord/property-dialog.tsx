@@ -24,7 +24,13 @@ import {
 } from "@/validations/landlord.validation"
 import { IPropertyResponse } from "@/types/property.types"
 import { TCategoriesData } from "@/types/categories.types"
-import { useState } from "react"
+import { useState, useTransition } from "react"
+import {
+  createPropertyAction,
+  updatePropertyAction,
+} from "@/actions/landlord/landlord.action"
+import { useAuth } from "@/context/auth-context"
+import { toast } from "sonner"
 
 type propertyDialogProps = {
   mode: "create" | "edit"
@@ -42,10 +48,27 @@ export function PropertyDialog({
     handleSubmit,
     formState: { errors },
   } = useForm<TCreateProperty>({ resolver: zodResolver(createPropertySchema) })
-  const [open,setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [isLoading, startTransition] = useTransition()
 
   const onSubmit = (data: TCreateProperty) => {
-    console.log(data)
+    if (mode === "create") {
+      startTransition(async () => {
+        const res = await createPropertyAction(data)
+        if (res.success) {
+          toast.success(res?.message)
+          setOpen(false)
+        }
+      })
+    } else {
+      startTransition(async () => {
+        const res = await updatePropertyAction(data, post?.id as string)
+        if (res.success) {
+          toast.success(res?.message)
+          setOpen(false)
+        }
+      })
+    }
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -150,8 +173,10 @@ export function PropertyDialog({
                   defaultValue={post && post.categoryId}
                   className="flex h-8 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
                 >
-                  {categories?.map((category)=>(
-                    <option key={category?.id} value={category?.id}>{category?.name}</option>
+                  {categories?.map((category) => (
+                    <option key={category?.id} value={category?.id}>
+                      {category?.name}
+                    </option>
                   ))}
                 </select>
                 {errors.categoryId && (
@@ -211,8 +236,27 @@ export function PropertyDialog({
           </div>
 
           <DialogFooter>
-            <Button onClick={()=>setOpen(false)} variant="outline">Cancel</Button>
-            <Button type="submit">Save Property</Button>
+            <Button
+              className={"cursor-pointer"}
+              onClick={() => setOpen(false)}
+              variant="outline"
+            >
+              Cancel
+            </Button>
+            <Button
+              className={"cursor-pointer bg-blue-700"}
+              variant={"default"}
+              type="submit"
+            >
+              {isLoading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-r-transparent"></div>
+                  Saving...
+                </span>
+              ) : (
+                <span>Save Property</span>
+              )}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

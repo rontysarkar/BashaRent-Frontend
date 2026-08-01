@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { MapPin, Building2, CheckCircle2, ShieldCheck } from "lucide-react"
 import { IPropertyResponse } from "@/types/property.types"
+import CardImageBox from "./card-image-box"
 
 export default function PropertyCard({
   property,
@@ -25,23 +26,10 @@ export default function PropertyCard({
       <div className="group flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs transition-all duration-300 hover:shadow-md">
         <div>
           <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
-            {property.photo && !imgError ? (
-              <Image
-                src={property.photo}
-                alt={property.title || "Property Image"}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-                onError={() => setImgError(true)}
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center bg-slate-100 text-slate-400">
-                <Building2 size={36} className="stroke-[1.5]" />
-                <span className="mt-1 text-xs font-medium text-slate-400">
-                  No Image Available
-                </span>
-              </div>
-            )}
+            <CardImageBox
+              url={property?.photo as string}
+              title={property?.title}
+            />
 
             {/* Category Badge */}
             {property.category?.name && (
@@ -61,10 +49,9 @@ export default function PropertyCard({
 
           {/* Content Box */}
           <div className="p-4">
-              <h3 className="line-clamp-1 text-base font-semibold text-slate-800 transition hover:text-blue-600">
-                {property.title}
-              </h3>
-
+            <h3 className="line-clamp-1 text-base font-semibold text-slate-800 transition hover:text-blue-600">
+              {property.title}
+            </h3>
 
             <div className="mt-1.5 flex items-center gap-1 text-xs text-slate-500">
               <MapPin size={14} className="shrink-0 text-blue-600" />

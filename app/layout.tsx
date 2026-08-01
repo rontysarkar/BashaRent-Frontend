@@ -37,9 +37,9 @@ export default function RootLayout({
       <body className="bg-slate-50">
         {/* <Navbar /> */}
         <Toaster position="top-center" richColors />
-        <ThemeProvider>
+        {/* <ThemeProvider> */}
           <AuthProvider>{children}</AuthProvider>
-        </ThemeProvider>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   )

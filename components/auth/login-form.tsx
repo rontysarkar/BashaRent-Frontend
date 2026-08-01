@@ -15,7 +15,7 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, startTransition] = useTransition()
   const router = useRouter()
-  const { setUser,user } = useAuth()
+  const { setUser, user } = useAuth()
 
   const {
     register,
@@ -28,14 +28,22 @@ export function LoginForm() {
     startTransition(async () => {
       const res = await loginAction(data)
 
-      if (!res.success) {
+      if (res.success) {
+        setUser(res?.data)
+
+        const dashboardUrl =
+          res?.data?.role === "ADMIN"
+            ? "/admin-dashboard"
+            : res?.data?.role === "LANDLORD"
+              ? "/landlord-dashboard"
+              : "/tenant-dashboard"
+
+        router.push(dashboardUrl)
+      } else {
         setError("password", {
           message: res?.message,
         })
       }
-      setUser(res?.data)
-      router.push("/tenant-dashboard")
-      return
     })
   }
 

@@ -7,6 +7,7 @@ import { toast } from "sonner"
 import { useEffect, useState, useTransition } from "react"
 import { PropertyStatusTypes } from "@/types/property.types"
 import { getPropertyRequestStatus } from "@/services/propertiy.service"
+import { useAuth } from "@/context/auth-context"
 
 export default function PropertyDetailsButton({
   propertyId,
@@ -17,6 +18,7 @@ export default function PropertyDetailsButton({
 }) {
   const [isLoading, startTransition] = useTransition()
   const [status, setStatus] = useState<PropertyStatusTypes>("NONE")
+  const { user } = useAuth()
 
   const handleAction = (mode: string) => {
     startTransition(async () => {
@@ -64,7 +66,7 @@ export default function PropertyDetailsButton({
     // Default / NONE status
     return "bg-green-600 hover:bg-blue-700 text-white active:scale-98"
   }
-  return (
+  return user?.role === "TENANT" ? (
     <div className="mt-6 space-y-3 border-t border-slate-100 pt-4">
       <Button
         disabled={status !== "NONE"}
@@ -97,5 +99,7 @@ export default function PropertyDetailsButton({
         Pay
       </Button>
     </div>
+  ) : (
+    <div></div>
   )
 }

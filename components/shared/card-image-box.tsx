@@ -12,9 +12,20 @@ export default function CardImageBox({
   title: string
 }) {
   const [imgError, setImgError] = useState(false)
+
+  const isValidUrl = (url:string)=>{
+    if(!url)return false;
+    try {
+      new URL(url);
+      return true;
+      
+    } catch  {
+      return false;
+    }
+  }
   return url && !imgError ? (
     <Image
-      src={url}
+      src={isValidUrl(url) ? url : "/placeholder.png"}
       alt={title || "Property Image"}
       fill
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"

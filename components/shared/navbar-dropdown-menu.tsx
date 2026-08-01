@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
-import { LogOut, Settings, User } from "lucide-react"
+import { LayoutDashboard, LogOut, Settings, User } from "lucide-react"
 import { useAuth } from "@/context/auth-context"
 import { logoutAction } from "@/actions/auth/logout.actioin"
 import Link from "next/link"
@@ -25,6 +25,27 @@ export default function NavbarDropdownMenu() {
       }
     }
   }
+
+  const dashboardUrl =
+    user?.role === "ADMIN"
+      ? "/admin-dashboard"
+      : user?.role === "LANDLORD"
+        ? "/landlord-dashboard"
+        : "/tenant-dashboard"
+
+  const dropdownMenu = [
+    {
+      title: "Profile",
+      url: `${dashboardUrl}/profile`,
+      icon: <User />,
+    },
+    {
+      title: "Dashboard",
+      url: dashboardUrl,
+      icon: <LayoutDashboard />,
+    },
+  ]
+
   return user ? (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -59,15 +80,15 @@ export default function NavbarDropdownMenu() {
           </DropdownMenuLabel>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <User data-icon="inline-start" />
-            Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Settings data-icon="inline-start" />
-            Settings
-          </DropdownMenuItem>
+        <DropdownMenuGroup className={"py-1"}>
+          {dropdownMenu?.map((item) => (
+            <Link key={item.title} href={item?.url}>
+              <DropdownMenuItem className={"py-1 font-bold"}>
+                {item?.icon}
+                {item?.title}
+              </DropdownMenuItem>
+            </Link>
+          ))}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem

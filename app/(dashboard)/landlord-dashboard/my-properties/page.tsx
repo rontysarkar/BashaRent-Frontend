@@ -8,9 +8,9 @@ export default async function MyPropertiesPage() {
   const myProperties = await getMyProperties()
   const categories = await getCategories()
   return (
-    <div className="mx-auto max-w-7xl">
-      <div className="bg-slate-50/50 py-6">
-        <div className="mb-4 flex items-center justify-between">
+    <div className="mx-auto max-w-7xl  w-full">
+      <div className="bg-slate-50/50 py-6 ">
+        <div className="mb-4 flex items-center justify-between ">
           <div>
             <h1 className="text-xl font-bold">All Properties</h1>
           </div>

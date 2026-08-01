@@ -68,7 +68,7 @@ export default async function MyPropertyCard({
           </p>
 
           {amenityList.length > 0 && (
-            <div className="mt-3.5 border-t border-slate-100 pt-3">
+            <div className="mt-3.5 border-t border-slate-100 py-2">
               <div className="flex flex-wrap items-center gap-1.5">
                 {amenityList.slice(0, 2).map((item, index) => (
                   <span

@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -11,17 +10,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Field, FieldGroup } from "@/components/ui/field"
+
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { PlusCircle, SquarePen } from "lucide-react"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select"
+
 import { Textarea } from "../ui/textarea"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -30,25 +23,32 @@ import {
   TCreateProperty,
 } from "@/validations/landlord.validation"
 import { IPropertyResponse } from "@/types/property.types"
+import { TCategoriesData } from "@/types/categories.types"
+import { useState } from "react"
 
 type propertyDialogProps = {
   mode: "create" | "edit"
   post?: IPropertyResponse
+  categories: TCategoriesData[]
 }
 
-export function PropertyDialog({ mode, post }: propertyDialogProps) {
+export function PropertyDialog({
+  mode,
+  post,
+  categories,
+}: propertyDialogProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TCreateProperty>({ resolver: zodResolver(createPropertySchema) })
+  const [open,setOpen] = useState(false);
 
   const onSubmit = (data: TCreateProperty) => {
     console.log(data)
   }
-
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
           mode === "create" ? (
@@ -150,10 +150,9 @@ export function PropertyDialog({ mode, post }: propertyDialogProps) {
                   defaultValue={post && post.categoryId}
                   className="flex h-8 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
                 >
-                  <option value="">Select category</option>
-                  <option value="apartment">Apartment</option>
-                  <option value="house">House</option>
-                  <option value="penthouse">Penthouse</option>
+                  {categories?.map((category)=>(
+                    <option key={category?.id} value={category?.id}>{category?.name}</option>
+                  ))}
                 </select>
                 {errors.categoryId && (
                   <p className="text-xs text-red-500">
@@ -212,7 +211,7 @@ export function PropertyDialog({ mode, post }: propertyDialogProps) {
           </div>
 
           <DialogFooter>
-            <Button variant="outline">Cancel</Button>
+            <Button onClick={()=>setOpen(false)} variant="outline">Cancel</Button>
             <Button type="submit">Save Property</Button>
           </DialogFooter>
         </form>

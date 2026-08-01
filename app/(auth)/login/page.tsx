@@ -4,7 +4,7 @@ import Link from "next/link"
 export default function page() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 flex flex-col items-center justify-center px-4 py-8">
-      {/* Logo Section */}
+
       <div className="mb-8 text-center animate-fade-in">
         <div className="inline-flex items-center justify-center mb-3">
           <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform">
@@ -15,16 +15,16 @@ export default function page() {
         <p className="text-xs text-slate-500 tracking-widest mt-1.5 font-medium">PROPERTY RENT SOLUTION</p>
       </div>
 
-      {/* Form Card */}
+
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6 backdrop-blur">
-          {/* Header */}
+
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900">Login</h2>
             <p className="text-slate-500 text-sm mt-1.5">Welcome back to the RentNest</p>
           </div>
 
-          {/* Form */}
+
           <LoginForm/>
 
           <div className="relative ">
@@ -45,7 +45,6 @@ export default function page() {
         </div>
       </div>
 
-      {/* Footer */}
       <p className="text-center text-slate-500 text-xs mt-8">© 2026 RENT NEST. All rights reserved.</p>
     </div>
   )

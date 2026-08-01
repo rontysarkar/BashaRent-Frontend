@@ -1,55 +1,37 @@
-"use client"
 
-import Image from "next/image"
-import {
-  MapPin,
-  Building2,
-  CheckCircle2,
-  ShieldCheck,
-  Trash2,
-} from "lucide-react"
+import { MapPin, CheckCircle2, ShieldCheck, Trash2 } from "lucide-react"
 import { IPropertyResponse } from "@/types/property.types"
-import { useState } from "react"
 import { Button } from "../ui/button"
 import { PropertyDialog } from "./property-dialog"
+import CardImageBox from "../shared/card-image-box"
+import { getCategories } from "@/services/category.service"
 
-export default function MyPropertyCard({
+export default async function MyPropertyCard({
   property,
 }: {
   property: IPropertyResponse
 }) {
-  const [imgError, setImgError] = useState(false)
-
   const amenityList = property.amenities
     ? property.amenities
         .split(",")
         .map((item) => item.trim())
         .filter(Boolean)
     : []
-
+  const categories = await getCategories()
   return (
     <div className="group flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs transition-all duration-300 hover:shadow-md">
       <div>
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
-          {property.photo && !imgError ? (
-            <Image
-              src={property.photo}
-              alt={property.title || "Property Image"}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-              onError={() => setImgError(true)}
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-          ) : (
-            <div className="flex h-full w-full flex-col items-center justify-center bg-slate-100 text-slate-400">
-              <Building2 size={36} className="stroke-[1.5]" />
-              <span className="mt-1 text-xs font-medium text-slate-400">
-                No Image Available
-              </span>
-            </div>
-          )}
+          <CardImageBox
+            url={property?.photo as string}
+            title={property?.title}
+          />
 
-          <PropertyDialog mode="edit" post={property} />
+          <PropertyDialog
+            mode="edit"
+            post={property}
+            categories={categories?.data}
+          />
           <Button
             variant={"ghost"}
             className="absolute top-0 right-0 cursor-pointer rounded-r-md px-2.5 py-1 text-[11px] font-medium text-rose-700 backdrop-blur-3xl"

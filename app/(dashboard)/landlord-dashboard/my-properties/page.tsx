@@ -1,24 +1,21 @@
 import { getMyProperties } from "@/actions/landlord/landlord.action"
 import MyPropertyCard from "@/components/landlord/my-property-card"
 import { PropertyDialog } from "@/components/landlord/property-dialog"
+import { getCategories } from "@/services/category.service"
 import { IPropertyResponse } from "@/types/property.types"
-import { PlusCircle } from "lucide-react"
-import Link from "next/link"
 
 export default async function MyPropertiesPage() {
   const myProperties = await getMyProperties()
-
+  const categories = await getCategories()
   return (
     <div className="mx-auto max-w-7xl">
       <div className="bg-slate-50/50 py-6">
-       
         <div className="mb-4 flex items-center justify-between">
-            <div>
+          <div>
             <h1 className="text-xl font-bold">All Properties</h1>
           </div>
           <div>
-            
-            <PropertyDialog mode="create"/>
+            <PropertyDialog mode="create" categories={categories?.data} />
           </div>
         </div>
         {!myProperties.success || myProperties.data?.length === 0 ? (

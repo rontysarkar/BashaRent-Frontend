@@ -88,3 +88,110 @@ export const updatePropertyAction = async (
   }
   return result
 }
+
+export const deletePropertyAction = async (postId: string) => {
+  const accessToken = await getAccessToken()
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "Token not found",
+    }
+  }
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/landlord/properties/${postId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+      },
+    }
+  )
+
+  const result = await res.json()
+  if (result.success) {
+    revalidateTag("properties", { expire: 0 })
+    revalidateTag("my-properties", { expire: 0 })
+  }
+  return result
+}
+
+export const getLandlordRentalRequestsAction = async () => {
+  const accessToken = await getAccessToken()
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "Token not found",
+    }
+  }
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/landlord/requests`,
+    {
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+      },
+      next: {
+        revalidate: 60 * 60 * 24,
+        tags: ["property-requests"],
+      },
+    }
+  )
+
+  const result = await res.json()
+  return result
+}
+
+export const approveOrRejectAction = async (
+  rentalRequestId: string,
+  status: string
+) => {
+  const accessToken = await getAccessToken()
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "Token not found",
+    }
+  }
+  const payload = { status }
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/landlord/requests/${rentalRequestId}`,
+    {
+      method: "PATCH",
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    }
+  )
+
+  const result = await res.json()
+  if (result.success) {
+    revalidateTag("property-requests", { expire: 0 })
+  }
+  return result
+}
+
+
+export const getLandlordDashboardStats = async()=>{
+
+  const accessToken = await getAccessToken()
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "Token not found",
+    }
+  }
+
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/landlord/overview`,{
+    headers:{
+      Cookie:`accessToken=${accessToken}`
+    },
+    next:{
+      revalidate:60*60*24*5,
+      tags:['landlord-stats']
+    }
+  })
+
+  const result = await res.json();
+  return result;
+}

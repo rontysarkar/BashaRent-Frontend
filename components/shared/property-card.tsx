@@ -1,7 +1,4 @@
-"use client"
 
-import React, { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { MapPin, Building2, CheckCircle2, ShieldCheck } from "lucide-react"
 import { IPropertyResponse } from "@/types/property.types"
@@ -12,7 +9,7 @@ export default function PropertyCard({
 }: {
   property: IPropertyResponse
 }) {
-  const [imgError, setImgError] = useState(false)
+
 
   const amenityList = property.amenities
     ? property.amenities
@@ -31,14 +28,14 @@ export default function PropertyCard({
               title={property?.title}
             />
 
-            {/* Category Badge */}
+  
             {property.category?.name && (
               <div className="absolute top-2.5 left-2.5 rounded-md bg-slate-900/80 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
                 {property.category.name}
               </div>
             )}
 
-            {/* Status Badge */}
+
             {property.status && (
               <div className="absolute top-2.5 right-2.5 flex items-center gap-1 rounded-md bg-emerald-600 px-2 py-1 text-[10px] font-semibold text-white shadow-xs">
                 <ShieldCheck size={12} />

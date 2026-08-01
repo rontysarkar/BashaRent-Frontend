@@ -15,7 +15,7 @@ export default async function DashboardLayout({
       <Navbar />
       <SidebarProvider>
         <AppSidebar />
-        <SidebarTrigger />
+        <SidebarTrigger className={'md:hidden'} />
         {children}
       </SidebarProvider>
     </div>

@@ -1,10 +1,9 @@
-
-import { MapPin, CheckCircle2, ShieldCheck, Trash2 } from "lucide-react"
+import { MapPin, CheckCircle2, ShieldCheck } from "lucide-react"
 import { IPropertyResponse } from "@/types/property.types"
-import { Button } from "../ui/button"
 import { PropertyDialog } from "./property-dialog"
 import CardImageBox from "../shared/card-image-box"
 import { getCategories } from "@/services/category.service"
+import { DeletePropertyButton } from "./delete-property-button"
 
 export default async function MyPropertyCard({
   property,
@@ -18,6 +17,7 @@ export default async function MyPropertyCard({
         .filter(Boolean)
     : []
   const categories = await getCategories()
+
   return (
     <div className="group flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs transition-all duration-300 hover:shadow-md">
       <div>
@@ -32,12 +32,7 @@ export default async function MyPropertyCard({
             post={property}
             categories={categories?.data}
           />
-          <Button
-            variant={"ghost"}
-            className="absolute top-0 right-0 cursor-pointer rounded-r-md px-2.5 py-1 text-[11px] font-medium text-rose-700 backdrop-blur-3xl"
-          >
-            <Trash2 size={18} />
-          </Button>
+          <DeletePropertyButton propertyId={property?.id} />
         </div>
 
         <div className="flex justify-between px-2 pt-2">

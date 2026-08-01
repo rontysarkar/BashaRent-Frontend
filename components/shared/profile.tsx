@@ -1,7 +1,6 @@
 "use client"
 
-import { Mail, Calendar, Shield, User as UserIcon, Pencil } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Mail, Calendar, Shield, User as UserIcon, } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { IUserData } from "@/types/user.types"
 import { ProfileEditDialog } from "./profile-edit-dialog"

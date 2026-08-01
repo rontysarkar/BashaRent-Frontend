@@ -167,7 +167,8 @@ export const approveOrRejectAction = async (
 
   const result = await res.json()
   if (result.success) {
-    revalidateTag("property-requests", { expire: 0 })
+    revalidateTag("property-requests", { expire: 0 });
+    revalidateTag("landlord-stats", { expire: 0 });
   }
   return result
 }

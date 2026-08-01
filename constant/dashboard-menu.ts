@@ -7,6 +7,7 @@ import {
   CreditCard,
   FileClock,
   LayoutDashboard,
+  SendIcon,
   Star,
   Tags,
   UserCog,
@@ -15,15 +16,21 @@ import {
 
 export const tenantMenu = [
   {
+    title: "Profile",
+    url: "/tenant-dashboard/profile",
+    icon: UserCog,
+  },
+  {
     title: "Dashboard",
     url: "/tenant-dashboard",
     icon: LayoutDashboard,
   },
   {
-    title: "Browse Properties",
-    url: "/properties",
-    icon: Building2,
+    title: "Rental Applications",
+    url: "/tenant-dashboard/my-requests",
+    icon: SendIcon,
   },
+  
   {
     title: "Payments",
     url: "/tenant-dashboard/payments",
@@ -35,13 +42,19 @@ export const tenantMenu = [
     icon: Star,
   },
   {
-    title: "Profile",
-    url: "/tenant-dashboard/profile",
-    icon: UserCog,
+    title: "Browse Properties",
+    url: "/properties",
+    icon: Building2,
   },
+  
 ]
 
 export const landlordMenu = [
+  {
+    title: "Profile",
+    url: "/landlord-dashboard/profile",
+    icon: UserCog,
+  },
   {
     title: "Dashboard",
     url: "/landlord-dashboard",
@@ -57,14 +70,15 @@ export const landlordMenu = [
     url: "/landlord-dashboard/rental-request",
     icon: ClipboardCheck,
   },
-  {
-    title: "Profile",
-    url: "/landlord-dashboard/profile",
-    icon: UserCog,
-  },
+  
 ]
 
 export const adminMenu = [
+  {
+    title: "Profile",
+    url: "/admin-dashboard/profile",
+    icon: UserCog,
+  },
   {
     title: "Dashboard",
     url: "/admin-dashboard",
@@ -90,11 +104,7 @@ export const adminMenu = [
     url: "/admin-dashboard/categories",
     icon: Tags,
   },
-  {
-    title: "Profile",
-    url: "/admin-dashboard/profile",
-    icon: UserCog,
-  },
+  
 ]
 
 

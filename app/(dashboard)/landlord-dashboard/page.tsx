@@ -1,7 +1,7 @@
 import { getLandlordDashboardStats } from "@/actions/landlord/landlord.action"
 import { Building2, ClipboardList, Wallet } from "lucide-react"
 
-export default async function page() {
+export default async function LandlordDashboardPage() {
   const res = await getLandlordDashboardStats();
   const result = res?.success ? res?.data : [];
   return (

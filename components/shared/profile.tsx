@@ -4,6 +4,7 @@ import { Mail, Calendar, Shield, User as UserIcon, Pencil } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { IUserData } from "@/types/user.types"
+import { ProfileEditDialog } from "./profile-edit-dialog"
 
 const statusStyles: Record<string, string> = {
   ACTIVE: "bg-green-50 text-green-700 border border-green-200",
@@ -84,10 +85,7 @@ export default function Profile({ user }: { user: IUserData }) {
             </div>
           </div>
 
-          <Button variant="outline" size="lg" className="gap-2">
-            <Pencil size={16} />
-            Edit Profile
-          </Button>
+          <ProfileEditDialog />
         </div>
 
         <div className="my-8 border-t" />

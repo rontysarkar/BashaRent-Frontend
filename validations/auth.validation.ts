@@ -13,6 +13,13 @@ export const registerSchema = z.object({
     password:z.string().min(6,"Password must be at least 6 characters")
 })
 
+export const updateProfileSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters").optional(),
+  bio:z.string().min(1,"Bio cannot be empty").optional(),
+  profilePhoto:z.string().optional()
+});
 
-export type loginInputType = z.infer<typeof loginSchema>;
-export type registerInputType = z.infer<typeof registerSchema>
+
+export type TLoginInput = z.infer<typeof loginSchema>;
+export type TRegisterInput = z.infer<typeof registerSchema>
+export type TUpdateProfile = z.infer<typeof updateProfileSchema>

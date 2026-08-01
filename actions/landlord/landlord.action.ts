@@ -1,6 +1,7 @@
 "use server"
 
 import { getAccessToken } from "@/services/access-token.service"
+import { TUpdateProfile } from "@/validations/auth.validation"
 import { TCreateProperty } from "@/validations/landlord.validation"
 import { revalidateTag } from "next/cache"
 
@@ -195,3 +196,7 @@ export const getLandlordDashboardStats = async()=>{
   const result = await res.json();
   return result;
 }
+
+
+
+

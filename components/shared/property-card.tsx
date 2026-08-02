@@ -1,6 +1,6 @@
 
 import Link from "next/link"
-import { MapPin, Building2, CheckCircle2, ShieldCheck } from "lucide-react"
+import { MapPin, CheckCircle2, ShieldCheck } from "lucide-react"
 import { IPropertyResponse } from "@/types/property.types"
 import CardImageBox from "./card-image-box"
 

@@ -21,6 +21,7 @@ export function TenantRequestsCard({
 }: {
   request: TTenantRentalRequestResponse
 }) {
+
   return (
     <div className="flex h-full flex-col rounded-lg border bg-white p-4 shadow-sm">
       <div className="flex items-start justify-between gap-2">

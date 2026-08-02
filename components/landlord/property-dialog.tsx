@@ -29,7 +29,6 @@ import {
   createPropertyAction,
   updatePropertyAction,
 } from "@/actions/landlord/landlord.action"
-import { useAuth } from "@/context/auth-context"
 import { toast } from "sonner"
 
 type propertyDialogProps = {

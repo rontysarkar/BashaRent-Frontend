@@ -8,6 +8,7 @@ export type TLandlordRentalRequestResponse = {
   property: {
     title: string
     price: number
+    status:string
   }
   tenant: {
     name: string

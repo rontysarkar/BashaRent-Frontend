@@ -52,3 +52,29 @@ export const getTenantAllRequestsAction = async () => {
   const result = await res.json()
   return result
 }
+
+
+export const getTenantPaymentHistory = async () => {
+  const accessToken = await getAccessToken()
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "Not Logged in",
+    }
+  }
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/payments`,
+    {
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+      },
+      next: {
+        revalidate: 60 * 60 * 24 *5,
+        tags: ["tenant-payments"],
+      },
+    }
+  )
+
+  const result = await res.json()
+  return result
+}

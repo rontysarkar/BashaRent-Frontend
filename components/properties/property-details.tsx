@@ -19,7 +19,9 @@ interface PropertyDetailsProps {
   property: PropertyDetailsResponse
 }
 
-export default async function PropertyDetails({ property }: PropertyDetailsProps) {
+export default async function PropertyDetails({
+  property,
+}: PropertyDetailsProps) {
   const amenityList = property.amenities
     ? property.amenities
         .split(",")
@@ -35,7 +37,6 @@ export default async function PropertyDetails({ property }: PropertyDetailsProps
       day: "numeric",
     }
   )
-
 
   return (
     <div className="bg-slate-50/50 py-8 text-slate-800">
@@ -110,11 +111,10 @@ export default async function PropertyDetails({ property }: PropertyDetailsProps
           {/* Left Side: Information */}
           <div className="space-y-6 lg:col-span-2">
             <PropertyDetailsImageBox
-              url={property.photo as string}
-              title={property.title as string}
+              url={property?.photo as string}
+              title={property?.title as string}
             />
 
-            {/* Description Card */}
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
               <h2 className="text-lg font-bold text-slate-900">Description</h2>
               <p className="mt-3 text-sm leading-relaxed whitespace-pre-line text-slate-600">
@@ -122,7 +122,6 @@ export default async function PropertyDetails({ property }: PropertyDetailsProps
               </p>
             </div>
 
-            {/* Amenities Card */}
             {amenityList.length > 0 && (
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
                 <h2 className="text-lg font-bold text-slate-900">
@@ -146,7 +145,6 @@ export default async function PropertyDetails({ property }: PropertyDetailsProps
             )}
           </div>
 
-          {/* Right Side: Landlord Contact Card */}
           <div className="space-y-6">
             <div className="sticky top-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
               <h3 className="text-base font-bold text-slate-900">
@@ -181,9 +179,11 @@ export default async function PropertyDetails({ property }: PropertyDetailsProps
                 </p>
               )}
 
-              <PropertyDetailsButton propertyStatus={property?.status} propertyId={property?.id} />
+              <PropertyDetailsButton
+                propertyStatus={property?.status}
+                propertyId={property?.id}
+              />
             </div>
-            {/* Additional Info */}
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
               <h2 className="text-lg font-bold text-slate-900">
                 Property Information

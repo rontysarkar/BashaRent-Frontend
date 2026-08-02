@@ -2,7 +2,7 @@
 
 import { Building2 } from "lucide-react"
 import Image from "next/image"
-import React, { useState } from "react"
+import { useState } from "react"
 
 export default function PropertyDetailsImageBox({
   url,
@@ -12,11 +12,21 @@ export default function PropertyDetailsImageBox({
   title: string
 }) {
   const [imgError, setImgError] = useState(false)
+
+  const isValidUrl = (url: string) => {
+    if (!url) return false
+    try {
+      new URL(url)
+      return true
+    } catch {
+      return false
+    }
+  }
   return (
     <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-xs md:aspect-[21/9]">
       {url && !imgError ? (
         <Image
-          src={url}
+          src={isValidUrl(url) ? url : "/placeholder.png"}
           alt={title}
           fill
           priority

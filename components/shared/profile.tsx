@@ -35,7 +35,7 @@ export default function Profile({ user }: { user: IUserData }) {
   const bio = user?.bio
   const profilePhoto = user?.profilePhoto
   return (
-    <div className="p-6 lg:p-10">
+    <div className="md:ml-6 p-6 lg:p-10">
       <div className="mb-8 lg:mb-10">
         <h1 className="text-2xl font-bold text-slate-800 lg:text-3xl">
           My Profile

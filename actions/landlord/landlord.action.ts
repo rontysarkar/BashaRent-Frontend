@@ -55,6 +55,7 @@ export const createPropertyAction = async (data: TCreateProperty) => {
   if (result.success) {
     revalidateTag("properties", { expire: 0 })
     revalidateTag("my-properties", { expire: 0 })
+    revalidateTag("landlord-stats", { expire: 0 })
   }
   return result
 }
@@ -86,6 +87,7 @@ export const updatePropertyAction = async (
   if (result.success) {
     revalidateTag("properties", { expire: 0 })
     revalidateTag("my-properties", { expire: 0 })
+    revalidateTag("landlord-stats", { expire: 0 })
   }
   return result
 }
@@ -112,6 +114,7 @@ export const deletePropertyAction = async (postId: string) => {
   if (result.success) {
     revalidateTag("properties", { expire: 0 })
     revalidateTag("my-properties", { expire: 0 })
+    revalidateTag("landlord-stats", { expire: 0 })
   }
   return result
 }
@@ -167,17 +170,15 @@ export const approveOrRejectAction = async (
 
   const result = await res.json()
   if (result.success) {
-    revalidateTag("property-requests", { expire: 0 });
-    revalidateTag("landlord-stats", { expire: 0 });
-    revalidateTag("tenant-stats", { expire: 0 });
-    revalidateTag("tenant-requests", { expire: 0 });
+    revalidateTag("property-requests", { expire: 0 })
+    revalidateTag("landlord-stats", { expire: 0 })
+    revalidateTag("tenant-stats", { expire: 0 })
+    revalidateTag("tenant-requests", { expire: 0 })
   }
   return result
 }
 
-
-export const getLandlordDashboardStats = async()=>{
-
+export const getLandlordDashboardStats = async () => {
   const accessToken = await getAccessToken()
   if (!accessToken) {
     return {
@@ -186,20 +187,21 @@ export const getLandlordDashboardStats = async()=>{
     }
   }
 
-  const res = await fetch(`${process.env.BACKEND_API_URL}/api/landlord/overview`,{
-    headers:{
-      Cookie:`accessToken=${accessToken}`
-    },
-    next:{
-      revalidate:60*60*24*5,
-      tags:['landlord-stats']
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/landlord/overview`,
+    {
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+      },
+      next: {
+        revalidate: 60 * 60 * 24 * 5,
+        tags: ["landlord-stats"],
+      },
     }
-  })
+  )
 
-  const result = await res.json();
-  return result;
+  const result = await res.json()
+  return result
 }
-
-
 
 

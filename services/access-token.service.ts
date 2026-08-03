@@ -1,7 +1,6 @@
 "use server"
 import { cookies } from "next/headers"
 import { jwtUtils } from "@/utils/jwt"
-import { redirect } from "next/navigation"
 
 export const getAccessToken = async () => {
   const cookieStore = await cookies()

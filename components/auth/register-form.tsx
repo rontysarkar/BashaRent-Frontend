@@ -2,10 +2,7 @@
 import React, { useState, useTransition } from "react"
 import { Button } from "../ui/button"
 import { useForm } from "react-hook-form"
-import {
-  registerSchema,
-  TRegisterInput,
-} from "@/validations/auth.validation"
+import { registerSchema, TRegisterInput } from "@/validations/auth.validation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Eye, EyeOff, Lock, Mail, User, UserCheck } from "lucide-react"
 import { Input } from "../ui/input"
@@ -13,11 +10,10 @@ import { registerAction } from "@/actions/auth/register.action"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 
-
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, startTransition] = useTransition()
-  const router = useRouter();
+  const router = useRouter()
 
   const {
     register,
@@ -34,9 +30,9 @@ export default function RegisterForm() {
         setError("password", {
           message: res.message,
         })
-      }else{
-        toast.success("Account created successfully! Please login.");
-        router.push('/login')
+      } else {
+        toast.success("Account created successfully! Please login.")
+        router.push("/login")
       }
 
       return

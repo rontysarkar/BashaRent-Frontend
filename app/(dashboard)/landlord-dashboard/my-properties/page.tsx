@@ -8,7 +8,7 @@ export default async function MyPropertiesPage() {
   const myProperties = await getMyProperties()
   const categories = await getCategories()
   return (
-    <div className="mx-auto max-w-7xl  w-full">
+    <div className=" max-w-6xl md:ml-12 w-full">
       <div className="bg-slate-50/50 py-6 ">
         <div className="mb-4 flex items-center justify-between ">
           <div>
@@ -25,7 +25,7 @@ export default async function MyPropertiesPage() {
             </h3>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
             {myProperties?.data
               .slice(0, 20)
               .map((property: IPropertyResponse) => (

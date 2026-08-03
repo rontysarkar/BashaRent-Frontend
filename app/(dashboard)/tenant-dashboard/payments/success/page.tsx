@@ -1,10 +1,13 @@
-import Link from "next/link"
+
 import { CheckCircle2, History, Home } from "lucide-react"
-import { Button } from "@/components/ui/button"
+
+
+import SuccessPageButton from "@/components/tenant/success-page-button"
 
 export default function PaymentSuccessPage() {
+  
   return (
-    <div className="flex  max-w-7xl w-full  items-center justify-center p-4">
+    <div className="flex w-full max-w-7xl items-center justify-center p-4">
       <div className="w-full max-w-lg rounded-2xl border bg-white p-6 text-center shadow-sm sm:p-8">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
           <CheckCircle2 size={40} className="animate-bounce" />
@@ -24,24 +27,7 @@ export default function PaymentSuccessPage() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2.5">
-          <Link
-            href="/tenant-dashboard/payments"
-            className="flex items-center justify-center gap-2"
-          >
-            <Button className="w-full bg-emerald-600 text-white hover:bg-emerald-700">
-              <History size={16} />
-              View Payment History
-            </Button>
-          </Link>
-
-          <Link href="/" className="flex items-center justify-center gap-2">
-            <Button variant="outline" className="w-full">
-              <Home size={16} />
-              Back to Home
-            </Button>
-          </Link>
-        </div>
+        <SuccessPageButton/>
       </div>
     </div>
   )

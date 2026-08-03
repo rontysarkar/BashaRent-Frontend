@@ -2,6 +2,7 @@
 
 import { getAccessToken } from "@/services/access-token.service"
 import { UserStatus } from "@/types/user.types"
+import { TCreateCategory } from "@/validations/category.validation"
 import { revalidateTag } from "next/cache"
 
 export const getAdminStats = async () => {
@@ -104,6 +105,30 @@ export const updateUserStatusAction = async (
   if (result.success) {
     revalidateTag("admin-stats", { expire: 0 })
     revalidateTag("all-users", { expire: 0 })
+  }
+  return result
+}
+
+export const createCategoryAction = async (payload: TCreateCategory) => {
+  const accessToken = await getAccessToken()
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "token not found",
+    }
+  }
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/categories`, {
+    method: "POST",
+    headers: {
+      Cookie: `accessToken=${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  })
+
+  const result = await res.json()
+  if (result.success) {
+    revalidateTag("categories", { expire: 0 })
   }
   return result
 }

@@ -7,3 +7,4 @@ export type TCategoriesData = {
     createdAt:string,
     updatedAt:string
 }
+

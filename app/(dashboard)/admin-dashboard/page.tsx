@@ -1,5 +1,5 @@
 import { getAdminStats } from "@/actions/admin/admin.action"
-import { Ban, Building2, ClipboardList, RotateCwFadingClock, Users, Wallet } from "lucide-react"
+import { Ban, Building2, RotateCwFadingClock, Users } from "lucide-react"
 
 type TAdminDashboardStats = {
   totalUser: number

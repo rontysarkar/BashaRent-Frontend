@@ -20,7 +20,7 @@ export default async function UsersPage() {
   ).length
 
   return (
-    <div className="space-y-6 p-6 lg:ml-8">
+    <div className="space-y-6 p-6 lg:ml-8  w-1/2 ">
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold tracking-tight text-slate-900">
           User Management

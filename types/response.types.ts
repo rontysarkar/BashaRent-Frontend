@@ -16,6 +16,28 @@ export type TLandlordRentalRequestResponse = {
   }
 }
 
+export type TAdminRentalRequestResponse = {
+  id: string
+  status: "PENDING" | "APPROVED" | "REJECTED"
+  propertyId: string
+  tenantId: string
+  createdAt: string
+  updatedAt: string
+  property: {
+    title: string
+    price: number
+    status: string
+    landlord: {
+      name: string
+      email: string
+    }
+  }
+  tenant: {
+    name: string
+    email?: string
+  }
+}
+
 
 export type TPropertyStatus = "AVAILABLE" | "RENTED"
 

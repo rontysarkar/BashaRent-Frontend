@@ -8,6 +8,8 @@ import { useEffect, useState, useTransition } from "react"
 import { PropertyStatusTypes } from "@/types/property.types"
 import { getPropertyRequestStatus } from "@/services/property.service"
 import { useAuth } from "@/context/auth-context"
+import { useRouter } from "next/navigation"
+import { paymentAction } from "@/actions/tenant/payment.action"
 
 export default function PropertyDetailsButton({
   propertyId,
@@ -19,6 +21,7 @@ export default function PropertyDetailsButton({
   const [isLoading, startTransition] = useTransition()
   const [status, setStatus] = useState<PropertyStatusTypes>("NONE")
   const { user } = useAuth()
+  const router = useRouter()
 
   const handleAction = (mode: string) => {
     startTransition(async () => {
@@ -66,6 +69,7 @@ export default function PropertyDetailsButton({
     // Default / NONE status
     return "bg-green-600 hover:bg-blue-700 text-white active:scale-98"
   }
+
   return user?.role === "TENANT" ? (
     <div className="mt-6 space-y-3 border-t border-slate-100 pt-4">
       <Button
@@ -89,7 +93,8 @@ export default function PropertyDetailsButton({
       </Button>
 
       <Button
-      disabled={propertyStatus === "RENTED"}
+        onClick={() => router.push("/tenant-dashboard/my-requests")}
+        disabled={propertyStatus === "RENTED"}
         className={`flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold transition ${
           status === "APPROVED"
             ? "cursor-pointer bg-blue-600 text-white shadow-md hover:bg-blue-700 active:scale-98"
@@ -97,7 +102,7 @@ export default function PropertyDetailsButton({
         }`}
       >
         <CreditCard size={18} />
-        Pay
+        My Request
       </Button>
     </div>
   ) : (

@@ -41,7 +41,7 @@ export function LoginForm() {
         router.push(dashboardUrl)
       } else {
         setError("password", {
-          message: res?.message,
+          message: "Email or Password incorrect",
         })
       }
     })

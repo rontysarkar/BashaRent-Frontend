@@ -89,6 +89,7 @@ export default function PropertyDetailsButton({
       </Button>
 
       <Button
+      disabled={propertyStatus === "RENTED"}
         className={`flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold transition ${
           status === "APPROVED"
             ? "cursor-pointer bg-blue-600 text-white shadow-md hover:bg-blue-700 active:scale-98"

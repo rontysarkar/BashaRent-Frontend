@@ -27,18 +27,7 @@ export default function Footer() {
         <div>
           <h4 className="font-bold mb-4 ">Contact Us</h4>
           <div className='flex space-x-4'>
-            {/* <Link href='#' className=''>
-              <fac className='w-6 h-6 p-0.5 bg-black rounded-full text-white ' />
-            </Link>
-            <Link href='#' className=''>
-              <Youtube className='w-6 h-6 p-1 bg-black rounded-full text-white ' />
-            </Link>
-            <Link href='#' className=''>
-              <X className='w-6 h-6 p-0.5 bg-black rounded-full text-white ' />
-            </Link>
-            <Link href='#' className=''>
-              <Instagram className='w-6 h-6 p-1 bg-black rounded-full text-white ' />
-            </Link> */}
+           
           </div>
         </div>
       </div>

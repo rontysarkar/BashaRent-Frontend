@@ -85,25 +85,26 @@ export const adminMenu = [
     icon: LayoutDashboard,
   },
   {
+    title: "Categories",
+    url: "/admin-dashboard/categories",
+    icon: Tags,
+  },
+  {
     title: "User Management",
     url: "/admin-dashboard/users",
     icon: Users,
   },
-  {
-    title: "Properties",
-    url: "/admin-dashboard/properties",
-    icon: Building,
-  },
+  // {
+  //   title: "Properties",
+  //   url: "/admin-dashboard/properties",
+  //   icon: Building,
+  // },
   {
     title: "Rental Requests (All)",
     url: "/admin-dashboard/rental-requests",
     icon: FileClock,
   },
-  {
-    title: "Categories",
-    url: "/admin-dashboard/categories",
-    icon: Tags,
-  },
+  
   
 ]
 

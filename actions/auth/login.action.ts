@@ -1,10 +1,10 @@
 "use server"
 
 import { getMe } from "@/services/auth.service"
-import { loginInputType } from "@/validations/auth.validation"
+import { TLoginInput } from "@/validations/auth.validation"
 import { cookies } from "next/headers"
 
-export const loginAction = async (data: loginInputType) => {
+export const loginAction = async (data: TLoginInput) => {
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/login`, {
     method: "POST",
     headers: {
@@ -27,8 +27,8 @@ export const loginAction = async (data: loginInputType) => {
       maxAge: 60 * 60 * 24 * 30,
     })
 
-    const userdata = await getMe();
-    return userdata;
+    const userdata = await getMe()
+    return userdata
   } else {
     return {
       success: false,

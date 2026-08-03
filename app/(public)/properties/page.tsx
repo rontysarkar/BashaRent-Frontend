@@ -1,14 +1,19 @@
-import PropertyCard from "@/components/shared/property-card"
-import { getProperties } from "@/services/propertiy.service"
-import { IPropertyResponse } from "@/types/property.types"
+import PropertyList from "@/components/properties/property-list"
+import PropertyQueryInput from "@/components/properties/property-query-input"
+import PropertySkeleton from "@/components/properties/property-skeleton"
+import { Suspense } from "react"
 
-export default async function page() {
-  const properties = await getProperties()
+export default async function PropertyPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const query = await searchParams;
   return (
     <div className="mx-auto max-w-6xl">
       <div className="bg-slate-50/50 py-12">
-        <div className="mb-2 flex items-center justify-between">
-          <div className="">
+        <div className="mb-2 text-center md:flex items-center justify-between">
+          <div className=" ">
             <h2 className="text-md mt-1 font-bold text-slate-800 sm:text-xl">
               All Properties
             </h2>
@@ -16,22 +21,12 @@ export default async function page() {
               Browse the best available listings
             </p>
           </div>
+          <PropertyQueryInput />
         </div>
-        {!properties.success || properties.data?.length === 0 ? (
-          <div className="flex min-h-[400px] w-full items-center justify-center text-center">
-            <h3 className="text-xl font-medium text-gray-500">
-              No Property Available
-            </h3>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {properties?.data
-              .slice(0, 20)
-              .map((property: IPropertyResponse) => (
-                <PropertyCard key={property.id} property={property} />
-              ))}
-          </div>
-        )}
+
+        <Suspense fallback={<PropertySkeleton />}>
+          <PropertyList query={query} />
+        </Suspense>
       </div>
     </div>
   )

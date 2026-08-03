@@ -83,7 +83,6 @@ export default function UserTable({ users }: { users: IUserData[] }) {
                 setRole(value as userRole)
               }
             }}
-            defaultValue="ALL"
           >
             <SelectTrigger className="w-[140px] text-xs">
               <SelectValue placeholder="Role" />

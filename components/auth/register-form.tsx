@@ -3,8 +3,8 @@ import React, { useState, useTransition } from "react"
 import { Button } from "../ui/button"
 import { useForm } from "react-hook-form"
 import {
-  registerInputType,
   registerSchema,
+  TRegisterInput,
 } from "@/validations/auth.validation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Eye, EyeOff, Lock, Mail, User, UserCheck } from "lucide-react"
@@ -24,9 +24,9 @@ export default function RegisterForm() {
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<registerInputType>({ resolver: zodResolver(registerSchema) })
+  } = useForm<TRegisterInput>({ resolver: zodResolver(registerSchema) })
 
-  const onSubmit = (data: registerInputType) => {
+  const onSubmit = (data: TRegisterInput) => {
     startTransition(async () => {
       const res = await registerAction(data)
 

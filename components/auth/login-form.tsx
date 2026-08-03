@@ -1,11 +1,11 @@
 "use client"
 
 import { useState, useTransition } from "react"
-import { Eye, EyeOff, Lock, Mail, Phone } from "lucide-react"
+import { Eye, EyeOff, Lock, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
-import { loginInputType, loginSchema } from "@/validations/auth.validation"
+import { loginSchema, TLoginInput } from "@/validations/auth.validation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginAction } from "@/actions/auth/login.action"
 import { useAuth } from "@/context/auth-context"
@@ -15,16 +15,16 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, startTransition] = useTransition()
   const router = useRouter()
-  const { setUser, user } = useAuth()
+  const { setUser } = useAuth()
 
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<loginInputType>({ resolver: zodResolver(loginSchema) })
+  } = useForm<TLoginInput>({ resolver: zodResolver(loginSchema) })
 
-  const onSubmit = (data: loginInputType) => {
+  const onSubmit = (data: TLoginInput) => {
     startTransition(async () => {
       const res = await loginAction(data)
 

@@ -6,7 +6,7 @@ import { sendRentalRequestAction } from "@/actions/properties/send-rental-reques
 import { toast } from "sonner"
 import { useEffect, useState, useTransition } from "react"
 import { PropertyStatusTypes } from "@/types/property.types"
-import { getPropertyRequestStatus } from "@/services/propertiy.service"
+import { getPropertyRequestStatus } from "@/services/property.service"
 import { useAuth } from "@/context/auth-context"
 
 export default function PropertyDetailsButton({

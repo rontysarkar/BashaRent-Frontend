@@ -1,5 +1,4 @@
 import { Navbar } from "@/components/shared/navbar"
-import { getMe } from "@/services/auth.service"
 import React from "react"
 
 export default async function PublicLayout({
@@ -7,11 +6,9 @@ export default async function PublicLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-
-    const result = await getMe();
   return (
     <div>
-      <Navbar user={result}/>
+      <Navbar />
       {children}
     </div>
   )

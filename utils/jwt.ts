@@ -1,4 +1,5 @@
-import { UserRole } from "@/types/common.types"
+
+import { UserRole } from "@/types/user.types"
 import jwt from "jsonwebtoken"
 
 type TJwtPayload = {

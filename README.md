@@ -1,6 +1,6 @@
-# 🏠 RentNest — Frontend
+# 🏠 BashaRent - Frontend
 
-Welcome to the client-side repository for **RentNest**. RentNest is a modern, responsive real-estate and rental property marketplace web application built to connect Landlords and Tenants seamlessly, supported by a full Admin oversight system.
+Welcome to the client-side repository for **BashaRent**. BashaRent is a modern, responsive real-estate and rental property marketplace web application built to connect Landlords and Tenants seamlessly, supported by a full Admin oversight system.
 
 ---
 

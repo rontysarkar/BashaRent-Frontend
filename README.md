@@ -15,11 +15,11 @@ The client-side repository for **BashaRent** — a modern, responsive real-estat
 
 | Resource | Link |
 |---|---|
-| 🌐 **Frontend Live Application** | [rent-nest-frontend-nine.vercel.app](https://rent-nest-frontend-nine.vercel.app/) |
-| 🔗 **Backend Live API** | [rent-nest-mocha.vercel.app](https://rent-nest-mocha.vercel.app/) |
-| 💻 **Backend GitHub Repository** | [BashaRent — Backend](https://github.com/your-username/BashaRent-Backend) |
+| 🌐 **Frontend Live Application** | [basharent-frontend-nine.vercel.app](https://basharent-frontend-nine.vercel.app/) |
+| 🔗 **Backend Live API** | [basharent-backend-mocha.vercel.app](https://basharent-backend-mocha.vercel.app/) |
+| 💻 **Backend GitHub Repository** | [BashaRent-Backend](https://github.com/rontysarkar/BashaRent-Backend) |
 
-> ⚠️ Replace the backend GitHub link above with your actual repository URL.
+>
 
 ---
 

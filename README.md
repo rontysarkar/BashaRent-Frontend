@@ -28,7 +28,7 @@ The client-side repository for **BashaRent** — a modern, responsive real-estat
 - **Framework:** Next.js (App Router, TypeScript)
 - **Styling:** Tailwind CSS, Shadcn UI, Lucide Icons, React Icons
 - **Form Handling & Validation:** React Hook Form, Zod
-- **State Management & Data Fetching:** TanStack Query (React Query), Axios
+- **State Management & Data Fetching:**React Context Api and Server action 
 - **Authentication:** Next.js Server Actions & Custom JWT Cookie Management
 - **Payment Integration:** Stripe Checkout
 - **Deployment:** Vercel

@@ -101,8 +101,11 @@ export default function NavbarDropdownMenu() {
       </DropdownMenuContent>
     </DropdownMenu>
   ) : (
-    <Link className="font-bold" href={"/login"}>
-      Login
-    </Link>
+    <Link
+  href="/login"
+  className="inline-flex items-center rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+>
+  Login
+</Link>
   )
 }

@@ -13,7 +13,6 @@ export default function page() {
       <FeaturedPropertiesSection/>
       <HowItWorks/>
       <WhyChooseBashaRent/>
-      <Footer/>
     </div>
   )
 }

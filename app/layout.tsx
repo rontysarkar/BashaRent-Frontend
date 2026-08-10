@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 
 import { Toaster } from "sonner"
 import { AuthProvider } from "@/context/auth-context"
+import Footer from "@/components/shared/footer"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -38,7 +39,10 @@ export default function RootLayout({
         {/* <Navbar /> */}
         <Toaster position="top-center" richColors />
         {/* <ThemeProvider> */}
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            {children}
+            <Footer/>
+            </AuthProvider>
         {/* </ThemeProvider> */}
       </body>
     </html>

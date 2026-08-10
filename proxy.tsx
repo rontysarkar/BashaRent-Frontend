@@ -3,7 +3,7 @@ import { NextRequest } from "next/server"
 import { getAccessToken } from "./services/access-token.service"
 import jwt, { JwtPayload } from "jsonwebtoken"
 
-const publicRoutes = ["/", "/properties", "/register", "/login"]
+const publicRoutes = ["/", "/properties", "/register", "/login","/privacy-policy","/terms-conditions","/contact"]
 
 // This function can be marked `async` if using `await` inside
 export async function proxy(request: NextRequest) {

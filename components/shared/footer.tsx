@@ -1,6 +1,6 @@
-
 import { Mail, Phone, Home, ShieldCheck } from "lucide-react"
 import Link from "next/link"
+import { FaWhatsapp } from "react-icons/fa"
 
 export default function Footer() {
   return (
@@ -38,9 +38,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-sm font-semibold text-slate-900">
-              Help
-            </h4>
+            <h4 className="mb-4 text-sm font-semibold text-slate-900">Help</h4>
             <ul className="space-y-2.5 text-sm text-slate-500">
               <li>
                 <Link
@@ -54,9 +52,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-sm font-semibold text-slate-900">
-              Legal
-            </h4>
+            <h4 className="mb-4 text-sm font-semibold text-slate-900">Legal</h4>
             <ul className="space-y-2.5 text-sm text-slate-500">
               <li>
                 <Link
@@ -83,23 +79,25 @@ export default function Footer() {
             </h4>
             <div className="flex flex-col gap-3">
               <Link
-                href="mailto:support@example.com"
+                href="mailto:rontysarkar@gmail.com"
                 className="flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-blue-600"
               >
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white border border-slate-200">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white">
                   <Mail size={14} className="text-blue-600" />
                 </span>
-                support@example.com
+                rontysarkar@gmail.com
               </Link>
 
               <Link
-                href="tel:+8801700000000"
+                href="https://wa.me/8801402796307"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-blue-600"
               >
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white border border-slate-200">
-                  <Phone size={14} className="text-blue-600" />
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white">
+                  <FaWhatsapp size={16} className="text-green-600" />
                 </span>
-                +880 1700-000000
+                +880 1402-796307
               </Link>
             </div>
           </div>

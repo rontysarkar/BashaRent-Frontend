@@ -1,14 +1,7 @@
 // "use client"
 
-import Image from "next/image"
 import Link from "next/link"
-import {
-  MapPin,
-  Building2,
-  CheckCircle2,
-  ShieldCheck,
-  ArrowRight,
-} from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import PropertyCard from "./property-card"
 import { Button } from "../ui/button"
 import { getProperties } from "@/services/property.service"

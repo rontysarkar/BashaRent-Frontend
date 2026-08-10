@@ -141,3 +141,23 @@
 .animate-shimmer {
   animation: shimmer 1.5s infinite;
 }
+
+@layer utilities {
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-35px) scale(1.15);
+    }
+  }
+
+  @keyframes floatSlow {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-25px) rotate(8deg);
+    }
+  }
+}

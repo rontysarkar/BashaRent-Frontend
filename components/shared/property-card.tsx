@@ -9,8 +9,6 @@ export default function PropertyCard({
 }: {
   property: IPropertyResponse
 }) {
-
-
   const amenityList = property.amenities
     ? property.amenities
         .split(",")
@@ -20,67 +18,59 @@ export default function PropertyCard({
 
   return (
     <Link href={`/properties/${property.id}`}>
-      <div className="group flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs transition-all duration-300 hover:shadow-md">
-        <div>
-          <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
+      <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl">
+        <div className="relative aspect-[16/11] w-full overflow-hidden bg-slate-100">
+          <div className="h-full w-full transition-transform duration-500 group-hover:scale-105">
             <CardImageBox
               url={property?.photo as string}
               title={property?.title}
             />
-
-  
-            {property.category?.name && (
-              <div className="absolute top-2.5 left-2.5 rounded-md bg-slate-900/80 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
-                {property.category.name}
-              </div>
-            )}
-
-
-            {property.status && (
-              <div className="absolute top-2.5 right-2.5 flex items-center gap-1 rounded-md bg-emerald-600 px-2 py-1 text-[10px] font-semibold text-white shadow-xs">
-                <ShieldCheck size={12} />
-                <span>{property.status}</span>
-              </div>
-            )}
           </div>
 
-          {/* Content Box */}
-          <div className="p-4">
-            <h3 className="line-clamp-1 text-base font-semibold text-slate-800 transition hover:text-blue-600">
-              {property.title}
-            </h3>
-
-            <div className="mt-1.5 flex items-center gap-1 text-xs text-slate-500">
-              <MapPin size={14} className="shrink-0 text-blue-600" />
-              <span className="truncate">{property.location}</span>
+          {property.category?.name && (
+            <div className="absolute top-2.5 left-2.5 rounded-md bg-slate-900/80 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
+              {property.category.name}
             </div>
+          )}
 
-            <p className="mt-2.5 line-clamp-2 text-xs leading-relaxed text-slate-600">
-              {property.description}
-            </p>
+          {property.status && (
+            <div className="absolute top-2.5 right-2.5 flex items-center gap-1 rounded-md bg-emerald-600 px-2 py-1 text-[10px] font-semibold text-white shadow-sm">
+              <ShieldCheck size={12} />
+              <span>{property.status}</span>
+            </div>
+          )}
+        </div>
 
-            {/* Amenities Chips */}
-            {amenityList.length > 0 && (
-              <div className="mt-3.5 border-t border-slate-100 pt-3">
-                <div className="flex flex-wrap items-center gap-1.5">
-                  {amenityList.slice(0, 2).map((item, index) => (
-                    <span
-                      key={index}
-                      className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-600"
-                    >
-                      <CheckCircle2 size={11} className="text-emerald-600" />
-                      {item}
-                    </span>
-                  ))}
-                  {amenityList.length > 2 && (
-                    <span className="text-[11px] font-medium text-slate-400">
-                      +{amenityList.length - 2} more
-                    </span>
-                  )}
-                </div>
-              </div>
-            )}
+        <div className="flex flex-1 flex-col p-4">
+          <h3 className="line-clamp-1 text-base font-semibold text-slate-800 transition-colors group-hover:text-blue-600">
+            {property.title}
+          </h3>
+
+          <div className="mt-1.5 flex items-center gap-1 text-xs text-slate-500">
+            <MapPin size={14} className="shrink-0 text-blue-600" />
+            <span className="truncate">{property.location}</span>
           </div>
+
+          {amenityList.length > 0 && (
+            <div className="mt-3 flex flex-wrap items-center gap-1.5">
+              {amenityList.slice(0, 2).map((item, index) => (
+                <span
+                  key={index}
+                  className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-600"
+                >
+                  <CheckCircle2 size={11} className="text-emerald-600" />
+                  {item}
+                </span>
+              ))}
+              {amenityList.length > 2 && (
+                <span className="text-[11px] font-medium text-slate-400">
+                  +{amenityList.length - 2} more
+                </span>
+              )}
+            </div>
+          )}
+
+          <div className="mt-auto" />
         </div>
 
         <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50/80 px-4 py-2.5">

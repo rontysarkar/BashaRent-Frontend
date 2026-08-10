@@ -89,7 +89,6 @@ export default async function PropertyDetails({
               </div>
             </div>
 
-            {/* Price Box */}
             <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 text-left md:text-right">
               <span className="text-xs font-medium text-slate-500">
                 Rent Price
@@ -106,9 +105,7 @@ export default async function PropertyDetails({
           </div>
         </div>
 
-        {/* SECTION 3: Content & Sidebar Grid */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {/* Left Side: Information */}
           <div className="space-y-6 lg:col-span-2">
             <PropertyDetailsImageBox
               url={property?.photo as string}

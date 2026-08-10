@@ -1,25 +1,26 @@
 "use client"
 
-import { CreditCard, Send } from "lucide-react"
+import { CreditCard, Loader2, Send } from "lucide-react"
 import { Button } from "../ui/button"
 import { sendRentalRequestAction } from "@/actions/properties/send-rental-request.action"
 import { toast } from "sonner"
-import { useEffect, useState, useTransition } from "react"
-import { PropertyStatusTypes } from "@/types/property.types"
-import { getPropertyRequestStatus } from "@/services/property.service"
 import { useAuth } from "@/context/auth-context"
 import { useRouter } from "next/navigation"
 import { paymentAction } from "@/actions/tenant/payment.action"
+import { IRentalRequestStatusResponse } from "@/types/property.types"
+import { useTransition } from "react"
 
 export default function PropertyDetailsButton({
   propertyId,
   propertyStatus,
+  rentalStatus,
 }: {
   propertyId: string
   propertyStatus: string
+  rentalStatus: IRentalRequestStatusResponse
 }) {
   const [isLoading, startTransition] = useTransition()
-  const [status, setStatus] = useState<PropertyStatusTypes>("NONE")
+  const [isLoadingPayment, startTransitionPayment] = useTransition()
   const { user } = useAuth()
   const router = useRouter()
 
@@ -51,22 +52,10 @@ export default function PropertyDetailsButton({
           toast.success(
             "Rental request sent successfully! Waiting for landlord approval."
           )
-          setStatus("PENDING")
         }
       }
     })
   }
-
-  useEffect(() => {
-    const checkStatus = async () => {
-      const propertyStatus = await getPropertyRequestStatus(propertyId)
-      if (propertyStatus.success) {
-        setStatus(propertyStatus?.data?.status)
-      }
-    }
-
-    checkStatus()
-  }, [propertyId])
 
   const getButtonStyles = () => {
     if (status === "PENDING") {
@@ -82,10 +71,26 @@ export default function PropertyDetailsButton({
     // Default / NONE status
     return "bg-green-600 hover:bg-blue-700 text-white active:scale-98"
   }
+
+  const handlePayment = (id: string) => {
+    startTransitionPayment(async () => {
+      const res = await paymentAction(id)
+      if (res?.success) {
+        router.push(res?.data?.url)
+      }
+    })
+  }
+
   return (
     <div className="mt-6 space-y-3 border-t border-slate-100 pt-4">
       <Button
-        disabled={status !== "NONE"}
+        disabled={
+          rentalStatus?.success === false
+            ? false
+            : rentalStatus.data?.status !== "NONE"
+              ? true
+              : false
+        }
         onClick={() => handleAction("sendRequest")}
         className={`flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold transition ${getButtonStyles()}`}
       >
@@ -94,27 +99,36 @@ export default function PropertyDetailsButton({
             <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-r-transparent"></div>
             Sending...
           </span>
-        ) : status === "NONE" ? (
+        ) : rentalStatus.success === false ? (
           <span className="flex items-center justify-center gap-2">
             {" "}
             <Send size={18} /> Send Request
           </span>
         ) : (
-          <span>{status}</span>
+          <span>{rentalStatus?.data?.status}</span>
         )}
       </Button>
 
       <Button
-        onClick={() => router.push("/tenant-dashboard/my-requests")}
-        disabled={user?.role === 'TENANT' ? false : true}
+        onClick={() => handlePayment(rentalStatus?.data?.id as string)}
+        disabled={rentalStatus?.data?.status !== "APPROVED"}
         className={`flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold transition ${
-          user && user?.role === 'TENANT'
+          rentalStatus?.data?.status === "APPROVED"
             ? "cursor-pointer bg-blue-600 text-white shadow-md hover:bg-blue-700 active:scale-98"
             : "cursor-not-allowed border border-slate-200 bg-slate-100 text-slate-400 opacity-60"
         }`}
       >
-        <CreditCard size={18} />
-        My Request
+        {isLoadingPayment ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Processing...
+          </>
+        ) : (
+          <>
+            <CreditCard className="mr-2 h-4 w-4" />
+            Pay
+          </>
+        )}
       </Button>
     </div>
   )

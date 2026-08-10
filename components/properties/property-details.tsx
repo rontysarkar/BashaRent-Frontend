@@ -12,15 +12,17 @@ import {
   Heart,
 } from "lucide-react"
 import PropertyDetailsImageBox from "./property-details-image-box"
-import { PropertyDetailsResponse } from "@/types/property.types"
+import { IPropertyDetailsResponse, IRentalRequestStatusResponse } from "@/types/property.types"
 import PropertyDetailsButton from "./property-details-button"
 
 interface PropertyDetailsProps {
-  property: PropertyDetailsResponse
+  property: IPropertyDetailsResponse,
+  rentalStatus:IRentalRequestStatusResponse
 }
 
 export default async function PropertyDetails({
   property,
+  rentalStatus
 }: PropertyDetailsProps) {
   const amenityList = property.amenities
     ? property.amenities
@@ -179,6 +181,7 @@ export default async function PropertyDetails({
               <PropertyDetailsButton
                 propertyStatus={property?.status}
                 propertyId={property?.id}
+                rentalStatus={rentalStatus}
               />
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">

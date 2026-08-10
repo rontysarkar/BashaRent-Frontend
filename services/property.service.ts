@@ -10,14 +10,12 @@ export const getProperties = async ({
   const params = new URLSearchParams()
 
   if (query) {
-  Object.entries(query).forEach(([key, value]) => {
-    if (value !== undefined && value !== null && value !== "") {
-      params.set(key, String(value))
-    }
-  })
-}
-
-
+    Object.entries(query).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== "") {
+        params.set(key, String(value))
+      }
+    })
+  }
 
   // if (query && query?.searchTerm) {
   //   params.set("searchTerm", query?.searchTerm as string)
@@ -61,7 +59,7 @@ export const getProperties = async ({
 }
 
 export const getPropertyDetails = async (id: string) => {
-  const res = await fetch(
+  const resDetails = await fetch(
     `${process.env.BACKEND_API_URL}/api/properties/${id}`,
     {
       next: {
@@ -70,8 +68,31 @@ export const getPropertyDetails = async (id: string) => {
       },
     }
   )
-  const result = await res.json()
-  return result
+  const resultDetails = await resDetails.json()
+
+  const accessToken = await getAccessToken()
+  if (!accessToken) {
+    return {
+      resultDetails,
+      resultStatus: { success: false },
+    }
+  } else {
+    const resStatus = await fetch(
+      `${process.env.BACKEND_API_URL}/api/rentals/status/${id}`,
+      {
+        headers: {
+          Cookie: `accessToken=${accessToken}`,
+        },
+        cache: "no-store",
+      }
+    )
+
+    const resultStatus = await resStatus.json()
+    return {
+      resultDetails,
+      resultStatus,
+    }
+  }
 }
 
 export const getPropertyRequestStatus = async (propertyId: string) => {

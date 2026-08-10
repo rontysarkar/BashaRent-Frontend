@@ -9,9 +9,9 @@ export default async function page({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const result = await getPropertyDetails(id)
+  const {resultStatus,resultDetails} = await getPropertyDetails(id)
 
-  return !result.success ? (
+  return !resultDetails.success ? (
     <div className="mx-auto my-20 flex min-h-[400px] max-w-4xl items-center justify-center bg-white text-center">
       <h3 className="text-xl font-medium text-gray-500">
         No Property Available
@@ -19,7 +19,7 @@ export default async function page({
     </div>
   ) : (
     <div>
-      <PropertyDetails property={result.data} />
+      <PropertyDetails rentalStatus={resultStatus}  property={resultDetails.data} />
     </div>
   )
 }

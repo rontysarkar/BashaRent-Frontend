@@ -18,7 +18,6 @@ export default function PaymentButton({
   const handlePayment = () => {
     startTransition(async () => {
       const res = await paymentAction(rentalRequestId)
-      console.log(res)
       if (res?.success) {
         router.push(res?.data?.url)
       }

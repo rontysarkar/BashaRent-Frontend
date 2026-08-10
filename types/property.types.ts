@@ -31,7 +31,7 @@ export interface Category {
   name: string
 }
 
-export interface PropertyDetailsResponse {
+export interface IPropertyDetailsResponse {
   id: string
   title: string
   price: number
@@ -47,6 +47,16 @@ export interface PropertyDetailsResponse {
   landlord: Landlord
   category: Category
   reviews: string[]
+}
+
+export interface IRentalRequestStatusResponse {
+  success:boolean,
+  status_code:number,
+  message:string,
+  data?:{
+    id:string,
+    status:PropertyStatusTypes
+  }
 }
 
 

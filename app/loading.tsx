@@ -23,7 +23,7 @@ export default function Loading() {
 
         <div className="mt-6 flex flex-col items-center space-y-3">
           <h2 className="text-xl font-bold tracking-tight text-slate-800">
-            Rent<span className="text-emerald-600">Nest</span>
+            Basha<span className="text-emerald-600">Rent</span>
           </h2>
 
           <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500">

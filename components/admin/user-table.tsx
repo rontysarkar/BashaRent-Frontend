@@ -42,8 +42,8 @@ export default function UserTable({ users }: { users: IUserData[] }) {
 
   return (
     <div className="rounded-xl border bg-white shadow-sm">
-      <div className="flex flex-col gap-3 border-b p-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="relative w-full sm:w-72">
+      <div className="flex flex-col gap-3 border-b p-2 sm:p-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="relative w-full lg:w-72">
           <Search
             size={16}
             className="absolute top-1/2 left-3 -translate-y-1/2 text-slate-400"

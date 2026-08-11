@@ -1,5 +1,6 @@
 
 import HowItWorks from '@/components/home/how-it-works'
+import Testimonials from '@/components/home/testimonials'
 import WhyChooseBashaRent from '@/components/home/why-choose-basharent'
 import Banner from '@/components/shared/banner'
 import FeaturedPropertiesSection from '@/components/shared/fetured-properties'
@@ -13,6 +14,7 @@ export default function page() {
       <FeaturedPropertiesSection/>
       <HowItWorks/>
       <WhyChooseBashaRent/>
+      <Testimonials/>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import NavbarDropdownMenu from "./navbar-dropdown-menu"
 import { HomeIcon } from "lucide-react"
+import { ThemeToggle } from "../theme-toggle"
 
 export function Navbar() {
   return (
@@ -19,6 +20,7 @@ export function Navbar() {
           </span>
         </Link>
         <div className="flex-1" />
+        
         <NavbarDropdownMenu />
       </div>
     </header>
